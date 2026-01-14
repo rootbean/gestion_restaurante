@@ -56,13 +56,20 @@ pipeline {
             }
         }
 
-        stage('Verify Deployment') {
+        stage('Smoke Test') {
             steps {
                 script {
-                    echo 'Verifying Service Health...'
-                    // Wait a few seconds for the service to start
+                    echo "Verificando que la app responda..."
+                    // Esperamos unos segundos a que el servidor de Go levante
                     sleep 5
-                    sh "curl -f http://localhost:3000/api/health"
+                    
+                    def response = sh(script: "curl -s http://host.docker.internal:3000/api/health", returnStatus: true)
+                    
+                    if (response == 0) {
+                        echo "✅ ¡Prueba exitosa! La aplicación responde correctamente."
+                    } else {
+                        error "❌ La aplicación no responde en el puerto 3000."
+                    }
                 }
             }
         }
