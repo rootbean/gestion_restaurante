@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = "gestion-restaurante-app"
-        CONTAINER_NAME = "gestion_restaurante-app-1"
+        CONTAINER_NAME = "backend"
         MONGO_URI = "mongodb://mongo:27017/gestion_restaurante"
     }
 
@@ -44,7 +44,8 @@ pipeline {
                     // Here we try to replicate the docker-compose setup manually or use docker-compose
                     
                     try {
-                        sh "docker rm -f ${CONTAINER_NAME} || true"
+                        sh "docker rm -f backend || true"
+                        sh "docker rm -f gestion_restaurante-app-1 || true"
                     } catch (err) {
                         echo "No existing container to remove"
                     }
