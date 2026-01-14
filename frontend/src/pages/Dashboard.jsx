@@ -24,7 +24,7 @@ const Dashboard = () => {
         <div className="dashboard-container">
             <div className="welcome-section">
                 <h2>Hola, {user?.name} 👋</h2>
-                <p>Aquí tienes un resumen de la actividad de hoy.</p>
+                <p>Aquí tienes un resumen de la actividad de hoy --- NEW.</p>
             </div>
 
             {/* Stats Grid */}
